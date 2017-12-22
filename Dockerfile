@@ -13,6 +13,9 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 ENV PYTHONPATH $PYTHONPATH:./app/src
-ENV GOOGLE_APPLICATION_CREDENTIALS=/app/src/myGoogle/creds.json
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/src/myGoogle/creds_2.json
+ENV FLASK_DEBUG=1
 
-CMD python src/flask-compose.py
+RUN chown -R www-data:www-data /app
+
+ENTRYPOINT ["gunicorn", "-b", ":8080", "main:app"]

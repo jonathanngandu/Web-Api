@@ -1,6 +1,3 @@
-#! /usr/bin/python
-import io
-import os
 import json
 
 # Imports the Google Cloud client library
@@ -13,24 +10,19 @@ class GoogleApi:
     Google api
     """
 
-    def run(self):
+    def run(self, img_data, app):
         """
         Run google api
         :return:
         """
+        uri = "https://storage.googleapis.com/images_11_12_17/%s" % img_data
+        app.logger.debug(uri)
+
         # Instantiates a client
         client = vision.ImageAnnotatorClient()
 
-        # The name of the image file to annotate
-        file_name = os.path.join(
-            os.path.dirname(__file__),
-            'resources/wakeupcat.jpg')
-
-        # Loads the image into memory
-        with io.open(file_name, 'rb') as image_file:
-            content = image_file.read()
-
-        image = types.Image(content=content)
+        image = types.Image()
+        image.source.image_uri = uri
 
         response = client.text_detection(image=image)
         texts = response.text_annotations
@@ -39,7 +31,6 @@ class GoogleApi:
         text_in_image = []
 
         for text in texts:
-            print('\n"{}"'.format(text.description.encode('utf-8')))
 
             text_in_image.append(('\n"{}"'.format(text.description.encode('utf-8'))))
 
