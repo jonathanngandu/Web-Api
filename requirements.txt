@@ -1,0 +1,3 @@
+Flask==0.12
+google-cloud-vision
+gunicorn==19.7.1
