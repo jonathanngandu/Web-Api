@@ -28,7 +28,7 @@ def image_text():
     app.logger.debug(image_name)
     # try:
     app.logger.debug('200')
-    return GoogleApi().run(image_name, app)
+    return jsonify({'image': GoogleApi().run(image_name, app)})
     # except:
     #     app.logger.debug('404')
     #     return abort(404)

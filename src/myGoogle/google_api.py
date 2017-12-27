@@ -41,7 +41,7 @@ class GoogleApi:
             # print('bounds: {}'.format(','.join(vertices)))
             # text_in_image.append(('bounds: {}'.format(','.join(vertices))))
 
-            return json.dumps(text_in_image)
+            return text_in_image
 
 if __name__ == '__main__':
     GoogleApi().run()
