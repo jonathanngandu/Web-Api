@@ -1,7 +1,8 @@
 import os
 
-from google.cloud import vision
+from google.cloud import firestore, vision
 from google.cloud.vision import types
+
 
 
 class GoogleApi:
@@ -21,7 +22,13 @@ class GoogleApi:
         app.logger.debug(uri)
 
         # Instantiates a client
+        storage = firestore.Client()
         client = vision.ImageAnnotatorClient()
+
+        bucket = storage.get_bucket('my-project-1503746529352')
+        blob = bucket.blob(img_data)
+        public_url = blob.public_url
+        app.logger.debug(public_url)
 
         image = types.Image()
         image.source.image_uri = uri

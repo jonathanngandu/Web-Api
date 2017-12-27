@@ -1,3 +1,4 @@
 Flask==0.12
 google-cloud-vision
+google-cloud-firestore
 gunicorn==19.7.1
