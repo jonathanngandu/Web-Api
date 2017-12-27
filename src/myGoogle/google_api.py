@@ -1,6 +1,5 @@
-import json
+import os
 
-# Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
 
@@ -10,12 +9,15 @@ class GoogleApi:
     Google api
     """
 
+    def __init__(self):
+        pass
+
     def run(self, img_data, app):
         """
-        Run google api
-        :return:
+        Using the image url provided, we make a request to the google vision api and return the image text
         """
-        uri = "https://storage.googleapis.com/images_11_12_17/%s" % img_data
+        image_uri = os.environ['IMAGE_URL']
+        uri = "%s/%s" % (image_uri, img_data)
         app.logger.debug(uri)
 
         # Instantiates a client
@@ -34,14 +36,7 @@ class GoogleApi:
 
             text_in_image.append(('\n"{}"'.format(text.description.encode('utf-8'))))
 
-
-            # vertices = (['({},{})'.format(vertex.x, vertex.y)
-            #              for vertex in text.bounding_poly.vertices])
-
-            # print('bounds: {}'.format(','.join(vertices)))
-            # text_in_image.append(('bounds: {}'.format(','.join(vertices))))
-
-            return text_in_image
+        return text_in_image
 
 if __name__ == '__main__':
     GoogleApi().run()

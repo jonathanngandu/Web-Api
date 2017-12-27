@@ -13,8 +13,9 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 ENV PYTHONPATH $PYTHONPATH:./app/src
-ENV GOOGLE_APPLICATION_CREDENTIALS=/app/src/myGoogle/creds_2.json
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/src/myGoogle/creds/creds_2.json
 ENV FLASK_DEBUG=1
+ENV IMAGE_URL='https://storage.googleapis.com/images_11_12_17'
 
 RUN chown -R www-data:www-data /app
 
