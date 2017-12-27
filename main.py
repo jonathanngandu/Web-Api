@@ -4,6 +4,14 @@ from src.myGoogle.google_api import GoogleApi
 app = Flask(__name__)
 
 
+@app.route('/', methods=['GET'])
+def homepage():
+    """
+    Homepage
+    """
+    return jsonify({'message': 'hello'})
+
+
 @app.route('/echo', methods=['GET'])
 def echo():
     """Simple echo service."""
