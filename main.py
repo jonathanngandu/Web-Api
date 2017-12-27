@@ -12,7 +12,7 @@ def homepage():
     return jsonify({'message': 'hello'})
 
 
-@app.route('/echo', methods=['GET'])
+@app.route('/echo', methods=['POST'])
 def echo():
     """Simple echo service."""
     message = request.get_json().get('message', '')
@@ -26,12 +26,12 @@ def image_text():
     """
     image_name = request.get_json().get('filename', '')
     app.logger.debug(image_name)
-    try:
-        app.logger.debug('200')
-        return GoogleApi().run(image_name, app)
-    except:
-        app.logger.debug('404')
-        return abort(404)
+    # try:
+    app.logger.debug('200')
+    return GoogleApi().run(image_name, app)
+    # except:
+    #     app.logger.debug('404')
+    #     return abort(404)
 
 
 if __name__ == '__main__':
