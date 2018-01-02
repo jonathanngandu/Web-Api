@@ -22,13 +22,12 @@ class GoogleApi:
         app.logger.debug(uri)
 
         # Instantiates a client
-        storage = firestore.Client()
+        # storage = firestore.Client()
         client = vision.ImageAnnotatorClient()
 
-        bucket = storage.get_bucket('my-project-1503746529352')
-        blob = bucket.blob(img_data)
-        public_url = blob.public_url
-        app.logger.debug(public_url)
+        # bucket = storage.get_bucket('my-project-1503746529352')
+        # public_url = storage.child("images/example.jpg").get_url()
+        # app.logger.debug(public_url)
 
         image = types.Image()
         image.source.image_uri = uri
